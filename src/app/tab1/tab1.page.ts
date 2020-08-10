@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CovidService } from '../covid.service';
 
 @Component({
   selector: 'app-tab1',
@@ -6,7 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  last_update
+  data
+  global
+  constructor(private service:CovidService) {
+  this.getWorld()
+}
 
-  constructor() {}
+getWorld(){
+  this.service.getall().subscribe(response=>{
+    console.log(response)
+    this.data=response
+    this.global=this.data.Global
+    console.log(this.global.TotalConfirmed.toLocaleString('en-IN'))
+  })
 
+}
 }

@@ -1,17 +1,69 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">Indian States</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <form>
+    <div class="select">
+    <ion-item>
+      <ion-label>Select State</ion-label>
+      <ion-select  (ionChange)="states($event)" class="form-control form-control-lg text-white bg-dark"  [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select One">
+        <ion-select-option  *ngFor="let d of data"  (change)="states(data)" value="{{d.state}}">
+          {{d.state}}
+        </ion-select-option>
+  
+      </ion-select>
+    </ion-item>
+    </div>
+  </form>
+  
+
+  <div *ngIf="show">  
+    <h3 style="text-align: center; margin-top: 20px;">Covid-19 cases in {{daaaaa &&  daaaaa[0].state}}</h3>
+    <ion-card class="confirmed" color="medium">
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Total Confirmed</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card-title style="text-align: center;">{{daaaaa &&  daaaaa[0].noOfCases.toLocaleString('en-IN')}}</ion-card-title>
+        
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="recovered"  color="success">
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Total Recovered</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card-title style="text-align: center;">{{daaaaa &&  daaaaa[0].cured.toLocaleString('en-IN')}}</ion-card-title>
+        
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="active"  color="warning">
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Total Active</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card-title style="text-align: center;">{{((daaaaa &&  daaaaa[0].noOfCases)-(daaaaa &&  daaaaa[0].cured +  daaaaa[0].deaths)).toLocaleString("en-IN")}}</ion-card-title>
+       
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="death" color="danger">
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Deaths</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card-title style="text-align: center;">{{daaaaa &&  daaaaa[0].deaths.toLocaleString("en-IN")}}</ion-card-title>
+       
+    </ion-card-content>
+  </ion-card>
+  
+</div>
+  <!-- <app-explore-container name="Tab 3 page"></app-explore-container> -->
 </ion-content>
